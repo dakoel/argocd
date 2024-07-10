@@ -1,0 +1,9 @@
+---
+longhorn:
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    host: longhorn.multipass.local
+    tls: true
+  preUpgradeChecker:
+    jobEnabled: false
