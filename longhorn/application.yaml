@@ -7,18 +7,18 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: "https://github.com/longhorn/charts.git"
-    targetRevision: longhorn-1.6.2
-    path: charts/longhorn
-    # helm:
-    #   valuesObject:
-    #     ingress:
-    #       enabled: true
-    #       ingressClassName: traefik
-    #       host: longhorn.multipass.local
-    #       tls: true
-    #     preUpgradeChecker:
-    #       jobEnabled: false
+    chart: longhorn/longhorn
+    repoURL: "https://charts.longhorn.io"
+    targetRevision: 1.6.2
+    helm:
+      valuesObject:
+        ingress:
+          enabled: true
+          ingressClassName: traefik
+          host: longhorn.multipass.local
+          tls: true
+        preUpgradeChecker:
+          jobEnabled: false
   destination:
     server: "https://kubernetes.default.svc"
     namespace: longhorn-system
