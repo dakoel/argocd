@@ -1,7 +1,6 @@
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
-name: longhorn
 metadata:
   name: longhorn
   namespace: argocd
