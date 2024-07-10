@@ -1,23 +1,30 @@
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
-project: default
-source:
-  repoURL: 'https://github.com/longhorn/charts'
-  path: charts/longhorn
-  targetRevision: longhorn-1.6.2
-  helm:
-    values: |
-      ingress:
-        enabled: true
-        ingressClassName: traefik
-        host: longhorn.multipass.local
-        tls: true
-      preUpgradeChecker:
-        jobEnabled: false
-destination:
-  server: 'https://kubernetes.default.svc'
-  namespace: longhorn-system
-syncPolicy:
-  syncOptions:
-    - CreateNamespace=true
+name: longhorn
+metadata:
+  name: longhorn
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/longhorn/charts'
+    path: charts/longhorn
+    targetRevision: longhorn-1.6.2
+    helm:
+      values: |
+        ingress:
+          enabled: true
+          ingressClassName: traefik
+          host: longhorn.multipass.local
+          tls: true
+        preUpgradeChecker:
+          jobEnabled: false
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: longhorn-system
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
