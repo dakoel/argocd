@@ -13,6 +13,7 @@ spec:
     path: charts/longhorn
     targetRevision: longhorn-1.6.2
     helm:
+      # TODO: Use variable
       values: |
         ingress:
           enabled: true

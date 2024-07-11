@@ -1,0 +1,45 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nextcloud
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/nextcloud/helm'
+    path: charts/nextcloud
+    targetRevision: nextcloud-5.2.0
+    helm:
+      # TODO: Use variables
+      values: |
+        persistence:
+          enabled: true
+          storageClass: "longhorn"
+        ingress:
+          enabled: true
+          className: traefik
+        nextcloud:
+          host: nextcloud.multipass.local
+          username: admin
+          password: password
+        externalDatabase:
+          enabled: true
+          type: postgresql
+          database: nextcloud
+          user: nextcloud
+          password: password
+        postgresql:
+          enabled: true
+          global:
+            postgresql:
+              auth:
+                username: nextcloud
+                password: password
+                database: nextcloud
+          primary:
+            persistence:
+              enabled: true
+              storageClass: longhorn
