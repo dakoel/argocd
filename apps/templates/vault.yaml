@@ -15,14 +15,14 @@ spec:
     helm:
       # TODO: Use variables
       values: |
-        global:
+        server:
           dataStorage:
             storageClass: "longhorn"
-        ingress:
-          enabled: true
-          ingressClassName: traefik
-          hosts:
-            - host: vault.multipass.local
+          ingress:
+            enabled: true
+            ingressClassName: traefik
+            hosts:
+              - host: vault.multipass.local
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: vault
