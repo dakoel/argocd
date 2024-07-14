@@ -24,6 +24,11 @@ spec:
             ingressClassName: traefik
             hosts:
               - host: vault.multipass.local
+          host_aliases:
+            - ip: 127.0.0.1
+              hostnames:
+                - vault.multipass.local
+
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: vault
