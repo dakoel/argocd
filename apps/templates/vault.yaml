@@ -17,7 +17,8 @@ spec:
       values: |
         server:
           dataStorage:
-            storageClass: "longhorn"
+            storageClass: longhorn
+            size: 1Gi
           ingress:
             enabled: true
             ingressClassName: traefik
