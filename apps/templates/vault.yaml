@@ -10,6 +10,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/hashicorp/vault-helm'
+    path: .
     targetRevision: v0.28.1
     helm:
       # TODO: Use variables
