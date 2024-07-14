@@ -1,0 +1,33 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/hashicorp/vault-helm'
+    path: /
+    targetRevision: v0.28.1
+    helm:
+      # TODO: Use variables
+      values: |
+        global:
+          dataStorage:
+            storageClass: "longhorn"
+        ingress:
+          enabled: true
+          ingressClassName: traefik
+          hosts:
+            - host: vault.multipass.local
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: vault
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
