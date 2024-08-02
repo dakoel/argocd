@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: 'https://github.com/argoproj/argo-helm'
     path: charts/argo-cd
-    targetRevision: 7.3.4
+    targetRevision: argo-cd-7.3.4
     helm:
       # TODO: Use variables
       values: |
