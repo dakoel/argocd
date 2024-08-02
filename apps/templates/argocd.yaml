@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: cmp-plugin
-  namespace: argocd
+  namespace: nextcloud
 data:
   avp.yaml: |
     apiVersion: argoproj.io/v1alpha1
