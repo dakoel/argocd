@@ -1,0 +1,43 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/argoproj/argo-helm'
+    path: charts/argo-cd
+    targetRevision: 7.3.4
+    helm:
+      # TODO: Use variables
+      values: |
+        global:
+          domain: argocd.multipass.local
+        certificate:
+          enabled: false
+        server:
+          ingress:
+            enabled: true
+            ingressClassName: traefik
+            tls: false
+        dex:
+          enabled: false
+        notifications:
+          enabled: false
+        applicationSet:
+          enabled: false
+        configs:
+          params:
+            server.insecure: true
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
