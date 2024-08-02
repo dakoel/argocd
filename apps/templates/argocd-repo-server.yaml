@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: argocd-repo-server
-  namespace: argocd/apps
+  namespace: argocd
 spec:
   template:
     spec:
