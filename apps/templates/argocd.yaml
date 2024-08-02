@@ -27,6 +27,7 @@ spec:
         repoServer:
           extraContainers:
             - name: argocd-repo-server
+              image: alpine:3.8
               volumeMounts:
                 - name: custom-tools
                   mountPath: /usr/local/bin/argocd-vault-plugin
